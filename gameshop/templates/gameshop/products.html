@@ -1,0 +1,33 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Produkty {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+  <div class="wrapper">
+    <div class="content">
+      <ul>
+
+        <!-- Iteracja przez listę produktów przekazanych do szablonu -->
+        {% for product in products %}
+        <li>
+          <!-- Link do szczegółów produktu -->
+          <a href="{{product.url_get}}">
+
+            <!-- Wyświetlanie obrazu, tytułu, ceny i opisu produktu -->
+            <img class="item-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
+            <div class="item-name">{{product.title}}</div>
+            <div class="item-price">{{product.price}}</div>
+            <div class="item-description">{{product.description}}</div>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{%endblock%}

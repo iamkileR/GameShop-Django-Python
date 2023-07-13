@@ -1,0 +1,42 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie dodatkowych bibliotek szablonów Django -->
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Logowanie {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+
+  <!-- Kontener na formularz logowania -->
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Tytuł sekcji -->
+      <h2>Logowanie</h2>
+
+      <!-- Formularz logowania -->
+      <form method="POST">
+
+        <!-- Token CSRF dla zabezpieczeń -->
+        {% csrf_token %}
+
+        <!-- Wyświetlenie formularza. Formularz jest przekazywany przez widok Django. -->
+        {{ form.as_p }}
+
+        <!-- Przycisk do wysłania formularza -->
+        <button type="submit" id="submit">Zaloguj</button>
+      </form>
+    </div>
+
+    <!-- Wyświetlenie wszystkich wiadomości flash (np. błędy, powiadomienia) -->
+    {% for message in messages %}
+      <p id="messages">{{ message }}</p>
+    {% endfor %}
+
+  </div>
+{%endblock%}

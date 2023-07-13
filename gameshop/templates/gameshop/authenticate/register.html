@@ -1,0 +1,51 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Rejestracja {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+
+  <!-- Kontener na formularz rejestracji -->
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Formularz rejestracji -->
+      <form action="" method="POST">
+
+        <!-- Token CSRF dla zabezpieczeń -->
+        {% csrf_token %}
+
+        <!-- Pole do wprowadzenia nazwy użytkownika -->
+        {{form.username.label}}
+        {{ form.username}}
+        <br>
+
+        <!-- Pole do wprowadzenia adresu email -->
+        {{form.email.label}}
+        {{ form.email}}
+        <br>
+
+        <!-- Pole do wprowadzenia hasła -->
+        {{form.password1.label}}
+        {{ form.password1}}
+        <br>
+
+        <!-- Pole do potwierdzenia hasła -->
+        {{form.password2.label}}
+        {{ form.password2}}
+        <br>
+
+        <!-- Przycisk do wysłania formularza -->
+        <input type="submit" id="submit" value="Submit">
+      </form>
+    </div>
+
+    <!-- Wyświetlenie błędów formularza -->
+    {{ form.errors }}
+  </div>
+{%endblock%}

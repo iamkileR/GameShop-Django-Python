@@ -1,0 +1,41 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Gra {{game.title}} {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+
+  <!-- Kontener na informacje o grze -->
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Obrazek gry -->
+      <img class="item-image" src="{{ game.image.url }}" alt="{{ game.name }}">
+
+      <!-- Tytuł gry -->
+      <div class="item-name">{{game.title}}</div>
+
+      <!-- Cena gry -->
+      <div class="item-price">{{game.price}}</div>
+
+      <!-- Opis gry -->
+      <div class="item-description">{{game.description}}</div>
+
+      <!-- Sprawdzanie czy użytkownik jest zalogowany -->
+      {%if user.is_authenticated%}
+
+      <!-- Przycisk do zakupu gry -->
+      <a href="{% url 'gameshop:buy' game.slug %}" class="btn">Kup Teraz</a>
+
+      <!-- Jeżeli użytkownik nie jest zalogowany, wyświetla komunikat -->
+      {% else %}
+      <a href="{% url 'gameshop:login' %}" class="btn">Musisz być zalogowany, aby móc kupić grę.</a>
+      {% endif %}
+    </div>
+  </div>
+{%endblock%}

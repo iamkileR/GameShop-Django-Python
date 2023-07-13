@@ -1,0 +1,84 @@
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Określenie typu dokumentu jako HTML5 -->
+<!DOCTYPE html>
+
+<!-- Otwarcie tagu html z atrybutem języka ustawionym na angielski -->
+<html lang="en">
+
+<!-- Otwarcie sekcji head dokumentu -->
+<head>
+
+  <!-- Definiowanie metadanych dla dokumentu -->
+  <meta charset="UTF-8"> <!-- Definiowanie kodowania znaków jako UTF-8 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Zgodność z przeglądarką Internet Explorer -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Odpowiednie skalowanie na urządzeniach mobilnych -->
+
+  <!-- Ładowanie plików CSS -->
+  <link rel="stylesheet" href="{% static 'gameshop/style.css' %}"> <!-- Ładowanie własnych stylów CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> <!-- Ładowanie stylów CSS z frameworku Bootstrap -->
+
+  <!-- Ładowanie skryptów JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> <!-- Ładowanie biblioteki JavaScript Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> <!-- Ładowanie skryptów JavaScript z frameworku Bootstrap -->
+
+  <!-- Definiowanie tytułu strony; tytuł może zostać nadpisany przez blok 'title' w szablonach dziedziczących -->
+  <title>{% block title %}Sklep {% endblock %}</title>
+
+<!-- Zamknięcie sekcji head dokumentu -->
+</head>
+
+<!-- Otwarcie sekcji body dokumentu -->
+<body>
+
+  <!-- Otwarcie głównego diva strony -->
+  <div class="cover">
+
+    <!-- Otwarcie sekcji nawigacji -->
+    <nav>
+
+      <!-- Wyświetlenie logo sklepu -->
+      <img src="{% static 'gameshop/logo.jpg' %}" class="logo" alt="">
+
+      <!-- Otwarcie listy linków nawigacyjnych -->
+      <ul>
+        <!-- Linki do różnych stron sklepu -->
+        <li><a href="{% url 'gameshop:index' %}">Strona główna</a></li>
+        <li><a href="/products">Produkty</a></li>
+        <li><a href="{% url 'gameshop:regulamin' %}">Regulamin</a></li>
+        <li><a href="{% url 'gameshop:pomoc' %}">Pomoc</a></li>
+      </ul>
+
+      <!-- Otwarcie diva dla kontrolek logowania/rejestracji -->
+      <div>
+
+        <!-- Wyświetlenie różnych kontrolek w zależności od stanu logowania użytkownika -->
+        {% if user.is_authenticated %}
+          <!-- Jeśli użytkownik jest zalogowany, wyświetla powitanie i link do wylogowania -->
+          <span class="welcome">Cześć, {{ user.username }}</span>
+          <a href="{% url 'gameshop:logout' %}" class="btn">Wyloguj</a>
+        {% else %}
+          <!-- Jeśli użytkownik nie jest zalogowany, wyświetla linki do logowania i rejestracji -->
+          <a href="{% url 'gameshop:login' %}" class="btn">Login</a>
+          <a href="{% url 'gameshop:register' %}" class="btn">Rejestracja</a>
+        {% endif %}
+
+      <!-- Zamknięcie diva dla kontrolek logowania/rejestracji -->
+      </div>
+
+    <!-- Zamknięcie sekcji nawigacji -->
+    </nav>
+
+    <!-- Blok 'content', który może zostać nadpisany przez zawartość w szablonach dziedziczących -->
+    {% block content %}
+    {% endblock %}
+
+  <!-- Zamknięcie głównego diva strony -->
+  </div>
+
+<!-- Zamknięcie sekcji body dokumentu -->
+</body>
+
+<!-- Zamknięcie tagu html -->
+</html>

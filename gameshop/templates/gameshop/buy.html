@@ -1,0 +1,48 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Kupujesz grę {{game.title}} {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+
+  <!-- Sprawdzanie czy użytkownik jest zalogowany -->
+  {%if user.is_authenticated%}
+  
+  <!-- Kontener na informacje o grze -->
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Obrazek gry -->
+      <img class="item-image" src="{{ game.image.url }}" alt="{{ game.name }}">
+
+      <!-- Tytuł gry -->
+      <div class="item-name">{{game.title}}</div>
+
+      <!-- Akordeon, który po rozwinięciu wyświetla kod do odbioru gry -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            ODBIERZ SWOJĄ GIERKĘ :)
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <ol>
+                <li>{{code}}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jeżeli użytkownik nie jest zalogowany, wyświetla komunikat -->
+  {% else %}
+  <p> Niezła próba </p>
+  {% endif %}
+{%endblock%}

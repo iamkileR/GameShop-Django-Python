@@ -1,0 +1,41 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Logowanie {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+
+  <!-- Kontener na formularz weryfikacji -->
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Wyświetlenie wszystkich wiadomości flash (np. błędy, powiadomienia), jeśli istnieją -->
+      {% if messages %}
+      <div class="messages">
+          {% for message in messages %}
+              <p>{{ message }}</p>
+          {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Formularz do wprowadzenia kodu weryfikacyjnego -->
+      <form method="post">
+
+        <!-- Token CSRF dla zabezpieczeń -->
+        {% csrf_token %}
+
+        <!-- Pole do wprowadzenia kodu weryfikacyjnego -->
+        <label for="otp_code">Kod weryfikacyjny:</label>
+        <input type="text" id="otp_code" name="otp_code" required>
+
+        <!-- Przycisk do wysłania formularza -->
+        <input type="submit" value="Zweryfikuj">
+      </form>
+    </div>
+  </div>
+{%endblock%}

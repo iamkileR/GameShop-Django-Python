@@ -1,0 +1,45 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Pomoc {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Wyświetlanie informacji pomocowych w formacie HTML -->
+      <div class="pomocny" style="margin-left: 100px;width: 500px; ">
+
+          <!-- Adres sklepu -->
+          Dom Adama:<br>
+          26-004 Bieliny<br><br>
+
+          <!-- Godziny otwarcia sklepu -->
+          <b>Godziny otwarcia:</b><br>
+          <ul>
+            <li>Poniedziałek - Piątek: 10.00-19.00</li>
+            <li>Sobota: 10.00-15.00</li>
+            <li>Niedziela: Nieczynne</li>
+          </ul>
+
+          <!-- Informacje o zespole sklepu -->
+          <b>GamerShop ma swój zespół sprawdzonych doradców:</b>
+          <ul>
+            <li>w sprawach handlowych - David Salwa:</li>
+            <li>w sprawach technicznych - Jakub, Adam, Bartłomiej</li>
+          </ul><br>
+
+          <!-- Adres email sklepu -->
+          <b>Napisz wiadomość do GamerShop na adres:</b>
+          <ul>
+            <li>gamershop.sklep@gmail.com</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+{%endblock%}

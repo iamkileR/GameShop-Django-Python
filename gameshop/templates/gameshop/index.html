@@ -1,0 +1,32 @@
+<!-- Rozszerzenie bazowego szablonu 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+
+<!-- Ładowanie mechanizmu Django do zarządzania statycznymi plikami -->
+{% load static %}
+
+<!-- Zdefiniowanie bloku tytułu, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block title%} Sklep {%endblock%}
+
+<!-- Zdefiniowanie bloku zawartości, który zostanie wstawiony do bloku o tej samej nazwie w szablonie bazowym -->
+{%block content%}
+  <div class="wrapper">
+    <div class="content">
+
+      <!-- Powitanie użytkownika -->
+      <h1>Buy some games!</h1>
+
+      <!-- Sprawdzanie czy użytkownik jest zalogowany -->
+      {% if user.is_authenticated %}
+
+      <!-- Jeśli użytkownik jest zalogowany, wyświetlany jest komunikat powitalny i link do produktów -->
+      <p> Cześć {{user.username}}! Może chciałbyś zagrać w coś nowego? :) </p>
+      <a href="{% url 'gameshop:products' %}" class="btn">Sprawdź naszą ofertę!</a>
+
+      <!-- Jeżeli użytkownik nie jest zalogowany, wyświetla się komunikat zachęcający do rejestracji -->
+      {% else %}
+      <p>Chcesz zagrać w nowe tytuły? Potrzebujesz nowych gier? Gamershop zapewi ci ich wiele! Zarejestruj się już dziś. Darmowa wysyłka dla nowych użytkowników.</p>
+      <a href="{% url 'gameshop:register' %}" class="btn">Dołącz teraz</a>
+      {% endif %}
+    </div>
+  </div>
+{%endblock%}

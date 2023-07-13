@@ -1,0 +1,44 @@
+<!-- Rozszerza podstawowy szablon 'gameshop/base.html' -->
+{% extends 'gameshop/base.html' %}
+{% load static %}
+
+<!-- Nadpisanie tytułu strony -->
+{% block title %} Regulamin {% endblock %}
+
+<!-- Nadpisanie zawartości strony -->
+{% block content %}
+<div class="wrapper">
+  <div class="content">
+
+    <!-- Tworzenie elementu akordeonu Bootstrapa, który pozwala na zwijanie i rozwijanie różnych sekcji regulaminu -->
+    <div class="accordion" id="accordionExample" style="width: 700px">
+
+      <!-- Pierwsza sekcja akordeonu dla §1 POSTANOWIENIA OGÓLNE -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            §1. POSTANOWIENIA OGÓLNE
+          </button>
+        </h2>
+        <!-- Treść dla §1 POSTANOWIENIA OGÓLNE -->
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <!-- Wykorzystanie tagów <ol> i <li> do tworzenia listy numerowanej -->
+            <ol>
+                <li>...</li>
+                <li>,,,</li>
+                <li>^^^</li>
+                <li>;;;</li>
+                <li>:::</li>
+                <!-- Kolejne punkty regulaminu -->
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kolejne sekcje akordeonu dla innych punktów regulaminu (§2 DEFINICJE, §3 ZAMÓWIENIA, §4 SPOSOBY I TERMINY PŁATNOŚCI ZA PRODUKT) są tworzone w ten sam sposób -->
+      
+    </div>
+  </div>
+</div>
+{%endblock%}
