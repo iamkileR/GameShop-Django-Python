@@ -1,4 +1,4 @@
-# API dla opornych
+# API
 
 Po uruchomieniu projektu API dostepne jest pod adresem 127.0.0.1:8000/api
 
